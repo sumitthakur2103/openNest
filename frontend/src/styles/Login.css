@@ -1,0 +1,80 @@
+.active {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Container for the toggle and form */
+.toggle-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Toggle buttons */
+.toggle-container button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.toggle-container button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Form container */
+.login-container,
+.signup-container {
+    margin-top: 20px;
+}
+
+/* Input styles */
+form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Submit button */
+form button[type='submit'] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button[type='submit']:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .toggle-container {
+        padding: 20px;
+        margin: 30px auto;
+    }
+}

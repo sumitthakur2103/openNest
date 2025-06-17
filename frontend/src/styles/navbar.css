@@ -1,0 +1,35 @@
+.navbar {
+    /* background-color: black; */
+    background-color: #1e1e1e;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-nav {
+    width: 70%;
+    /* background-color:brown; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+}
+.left-nav h2{
+    font-size: 2.5rem;
+}
+
+.right-nav {
+    width: 30%;
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+    padding: 10px;
+    padding-right: 30px;
+}
