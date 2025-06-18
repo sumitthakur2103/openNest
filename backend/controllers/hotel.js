@@ -1,41 +1,45 @@
 import Hotel from "../models/hotel.js";
-import { getCoordinatesFromCity } from "../utlis/geocode.js";
+import { getCoordinatesFromCity } from "../utils/geocode.js";
 
 const addNewHotel = async (req, res) => {
-    const { name,
-        description,
-        city,
-        landmark,
-        address,
-        price,
-        images,
-        coordinates
-    } = req.body;
+    try {
+        const {
+            name,
+            description,
+            city,
+            landmark,
+            address,
+            price,
+        } = req.body;
 
+        let coordinates = req.body.coordinates;
+        if (!coordinates) {
+            coordinates = await getCoordinatesFromCity(city);
+        }
 
-    let finalCoordinates = coordinates;
-    if (!finalCoordinates) {
-        finalCoordinates = await getCoordinatesFromCity(city); // get from Mapbox
+        // Get image URLs from multer-cloudinary
+        const images = req.files.map(file => file.path);
+
+        const hotel = await Hotel.create({
+            name,
+            description,
+            city,
+            landmark,
+            address,
+            price,
+            images,
+            coordinates,
+            owner: req.user.userId,
+        });
+
+        res.status(201).json({
+            message: "Hotel created successfully",
+            hotel
+        });
+    } catch (err) {
+        res.status(500).json({ message: "Failed to add hotel", error: err.message });
     }
-    const hotel = await Hotel.create({
-        name,
-        description,
-        city,
-        landmark,
-        address,
-        price,
-        images,
-        coordinates: finalCoordinates,
-        owner: req.user.userId,
-    });
-
-    res.status(201).json({
-        message: "Hotel created successfully",
-        hotel
-    });
-}
-
-
+};
 
 const getMyHotels = async (req, res) => {
     const hotels = await Hotel.find({ owner: req.user.userId });

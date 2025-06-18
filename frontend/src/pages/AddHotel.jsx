@@ -1,15 +1,12 @@
-import React, { useState } from 'react'; // make sure useState is imported
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axios'; // adjust if needed
-
-import HotelLocationMap from '../components/HotelLocationMap.jsx'; // ensure this path is correct
-
-import NewHotelDetails from "./NewHotelDetails.jsx"; // ensure this path is correct
+import axios from '../api/axios';
+import HotelLocationMap from '../components/HotelLocationMap.jsx';
+import NewHotelDetails from "./NewHotelDetails.jsx";
 
 export default function AddHotel() {
     const navigate = useNavigate();
 
-    // ✅ Make sure formData is initialized with all needed fields
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -17,45 +14,51 @@ export default function AddHotel() {
         landmark: '',
         address: '',
         price: '',
-        image: '',
         coordinates: null,
     });
-
     const [step, setStep] = useState(1);
+    const [imageFiles, setImageFiles] = useState([]);
+    const [uploading, setUploading] = useState(false);
 
-    const nextStep = () => {
-        setStep(2);
+    const nextStep = () => setStep(2);
+
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files).slice(0, 5);
+        setImageFiles(files);
     };
 
     const handleAddBtn = async (e) => {
-         console.log("Form Data:", formData); // Debugging line to check formData
         e.preventDefault();
         const user = JSON.parse(localStorage.getItem("user"));
         const token = localStorage.getItem("token");
-
         if (!user || !token) {
             console.error("User not logged in or token missing.");
             return;
         }
-
-        const dataToSend = {
-            ...formData,
-            latitude: formData.coordinates?.lat,
-            longitude: formData.coordinates?.lng,
-        };
-
-        delete dataToSend.coordinates;
-
+        setUploading(true);
+        const form = new FormData();
+        form.append("name", formData.name);
+        form.append("description", formData.description);
+        form.append("city", formData.city);
+        form.append("landmark", formData.landmark);
+        form.append("address", formData.address);
+        form.append("price", formData.price);
+        if (formData.coordinates) {
+            form.append("coordinates[lat]", formData.coordinates.lat);
+            form.append("coordinates[lng]", formData.coordinates.lng);
+        }
+        imageFiles.forEach(file => form.append("images", file));
         try {
-            const res = await axios.post('/hotels/add', dataToSend, {
+            await axios.post('/hotels/add', form, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                 },
             });
-
+            setUploading(false);
             navigate('/myhotels');
         } catch (err) {
+            setUploading(false);
             console.error('Error while adding hotel:', err);
         }
     };
@@ -63,11 +66,22 @@ export default function AddHotel() {
     return (
         <>
             {step === 1 ? (
-                <NewHotelDetails
-                    nextStep={nextStep}
-                    formData={formData}
-                    setFormData={setFormData}
-                />
+                <div>
+                    <NewHotelDetails
+                        nextStep={nextStep}
+                        formData={formData}
+                        setFormData={setFormData}
+                    />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={handleImageChange}
+                        max={5}
+                    />
+                    <p>{imageFiles.length} image(s) selected (max 5)</p>
+                    {uploading && <p>Uploading images...</p>}
+                </div>
             ) : (
                 <HotelLocationMap
                     formData={formData}

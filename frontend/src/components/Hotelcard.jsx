@@ -2,8 +2,8 @@ import React from 'react';
 import '../styles/Hotelcard.css';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios.js';
-export default function Hotelcard({ hotel, onDelete }) {
 
+export default function Hotelcard({ hotel, onDelete }) {
     const navigate = useNavigate();
 
     const handleEdit = () => {
@@ -12,20 +12,23 @@ export default function Hotelcard({ hotel, onDelete }) {
 
     const handleDelete = async () => {
         try {
-            const res = await axios.delete(`/hotels/${hotel._id}`, {
+            await axios.delete(`/hotels/${hotel._id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-
-            onDelete(hotel._id); // Call the onDelete function passed from Myhotels component
+            onDelete(hotel._id);
         } catch (err) {
             console.error("Error deleting hotel:", err);
         }
     }
     return (
         <div className="hotel-card">
-            <img src={hotel.image} alt={hotel.name} className="hotel-image" />
+            {hotel.images && hotel.images.length > 0 ? (
+                <img src={hotel.images[0]} alt={hotel.name} className="hotel-image" />
+            ) : (
+                <div className="hotel-image" style={{ background: "#eee" }}>No Image</div>
+            )}
             <div className="hotel-details">
                 <h3 className="hotel-name">{hotel.name}</h3>
                 <p className="hotel-description">{hotel.description}</p>

@@ -47,12 +47,7 @@ export default function NewHotelDetails({ nextStep, formData, setFormData }) {
                 value={formData.price}
                 onChange={handleChange}
             />
-            <input
-                name="image"
-                placeholder="Cloudinary Image URL"
-                value={formData.image}
-                onChange={handleChange}
-            />
+           
 
             <button onClick={nextStep}>Next</button>
         </div>
