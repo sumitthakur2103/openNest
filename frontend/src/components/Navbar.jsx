@@ -24,7 +24,7 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="left-nav">
                 <h2>OpenNest</h2>
-                <Link to="/">Browse Rooms</Link>
+                <Link to="/book-a-room">Browse Rooms</Link>
                 <Link to="/offers">Special Offers</Link>
 
                 {user ? <>

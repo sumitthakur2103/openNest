@@ -30,6 +30,7 @@ export default function Hotelcard({ hotel, onDelete }) {
                 <div className="hotel-image" style={{ background: "#eee" }}>No Image</div>
             )}
             <div className="hotel-details">
+                <h2 className='hotel-id'>{hotel._id}</h2>
                 <h3 className="hotel-name">{hotel.name}</h3>
                 <p className="hotel-description">{hotel.description}</p>
                 <div className="hotel-city">{hotel.city}</div>

@@ -10,6 +10,9 @@ import { AuthProvider } from './context/AuthContext';
 import Myhotels from './pages/Myhotels';
 import EditHotel from './pages/EditHotel';
 import AddHotel from './pages/AddHotel';
+import BrowseRooms from './pages/BrowseRooms';
+import CityHotelsPage from './pages/CityHotelsPage';
+import ViewHotel from './components/viewHotel';
 function App() {
 
   return (
@@ -22,11 +25,15 @@ function App() {
             <Route path='/myhotels' element={<Myhotels />} ></Route>
             <Route path='addNewHotel' element={<AddHotel />}></Route>
             <Route path='editHotel/:id' element={<EditHotel />}></Route>
+            <Route path='/book-a-room' element={<BrowseRooms />} />
+            <Route path='/hotel/:hotelId' element={<ViewHotel />}></Route>
+            <Route path="/hotels/:city" element={<CityHotelsPage />}></Route>
+            <Route path='*' element={<h1>404 Not Found</h1>} />
             {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}
           </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+        </BrowserRouter >
+      </AuthProvider >
     </>
 
   )

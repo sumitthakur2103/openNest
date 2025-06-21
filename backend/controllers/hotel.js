@@ -170,5 +170,22 @@ const getHotel = async (req, res) => {
     });
 }
 
+const getHotelsByCity = async (req, res) => {
+    const { city } = req.params;
+    const hotels = await Hotel.find({
+        city: { $regex: new RegExp(city, 'i') }
+    });
 
-export { addNewHotel, getMyHotels, editHotel, deleteMyHotel, getAllHotels, getHotel };
+    if (!hotels || hotels.length === 0) {
+        return res.status(404).json({
+            message: "No hotels found in this city"
+        });
+    }
+    res.status(200).json({
+        message: "Hotels in city fetched successfully",
+        hotels
+    });
+}
+
+
+export { addNewHotel, getMyHotels, editHotel, deleteMyHotel, getAllHotels, getHotel, getHotelsByCity };

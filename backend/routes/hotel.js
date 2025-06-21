@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addNewHotel, getMyHotels, editHotel, getAllHotels, deleteMyHotel, getHotel } from "../controllers/hotel.js";
+import { addNewHotel, getMyHotels, editHotel, getAllHotels, deleteMyHotel, getHotel, getHotelsByCity } from "../controllers/hotel.js";
 import { authMiddleware } from "../middlewares/auth.js";
 import upload from "../middlewares/upload.js";
 const router = Router();
@@ -17,6 +17,9 @@ router.route("/getMyHotels").get(authMiddleware, getMyHotels);
 // ____Public routes______
 //all hotels
 router.route("/").get(getAllHotels);
+
+//get hotels by city
+router.route("/city/:city").get(getHotelsByCity);
 
 //edit individual hotel
 router.route("/:hotelId").post(authMiddleware, editHotel);
