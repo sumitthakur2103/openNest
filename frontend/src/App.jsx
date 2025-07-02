@@ -13,6 +13,7 @@ import AddHotel from './pages/AddHotel';
 import BrowseRooms from './pages/BrowseRooms';
 import CityHotelsPage from './pages/CityHotelsPage';
 import ViewHotel from './components/viewHotel';
+import MyBookings from './pages/MyBookings';
 function App() {
 
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='addNewHotel' element={<AddHotel />}></Route>
             <Route path='editHotel/:id' element={<EditHotel />}></Route>
             <Route path='/book-a-room' element={<BrowseRooms />} />
+            <Route path='/mybookings' element={<MyBookings />}></Route>
             <Route path='/hotel/:hotelId' element={<ViewHotel />}></Route>
             <Route path="/hotels/:city" element={<CityHotelsPage />}></Route>
             <Route path='*' element={<h1>404 Not Found</h1>} />

@@ -26,11 +26,6 @@ export default function CityHotelsPage() {
         }
     }, []);
 
-    const bookHotel = () => {
-        navigate(`${hote}`);
-        alert("Hotel booking functionality is not implemented yet.");
-        // Here you can add logic to handle hotel booking, such as navigating to a booking page or showing a booking form.
-    }
 
     return (
         <>

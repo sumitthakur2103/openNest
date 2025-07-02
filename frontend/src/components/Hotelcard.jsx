@@ -23,7 +23,7 @@ export default function Hotelcard({ hotel, onDelete }) {
         }
     }
     return (
-        <div className="hotel-card">
+        <div className="hotel-card" onClick={() => navigate(`/hotel/${hotel._id}`)}>
             {hotel.images && hotel.images.length > 0 ? (
                 <img src={hotel.images[0]} alt={hotel.name} className="hotel-image" />
             ) : (

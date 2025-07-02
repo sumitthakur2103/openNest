@@ -7,13 +7,24 @@ const hotelSchema = new mongoose.Schema({
     landmark: { type: String },
     address: { type: String, required: true },
     price: { type: Number, required: true },
-    images: [{ type: String }], // Array of image URLs
+    images: [{ type: String }],
     coordinates: {
-        lat: { type: Number, required: true, default: 0 },
-        lng: { type: Number, required: true, default: 0 },
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+            default: 'Point'
+        },
+        coordinates: {
+            type: [Number], // [longitude, latitude]
+            required: true
+        }
     },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
+
+// Add 2dsphere index for geospatial queries
+hotelSchema.index({ coordinates: "2dsphere" });
 
 const Hotel = mongoose.model("Hotel", hotelSchema);
 export default Hotel;

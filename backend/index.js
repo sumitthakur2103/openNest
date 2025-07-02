@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.js';
 import bookingRoutes from './routes/booking.js'; // Assuming you have a bookings route
 import hotelRoutes from './routes/hotel.js'; // Assuming you have a hotels route
+import paymentRoutes from './routes/paymentRoutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -28,6 +30,7 @@ app.get('/', (req, res) => {
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/hotels", hotelRoutes); // Assuming you have a hotels route
 app.use("/api/v1/bookings", bookingRoutes); // Assuming you have a bookings route
+app.use('/api/v1/payments', paymentRoutes);
 
 const start = async () => {
     try {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addNewHotel, getMyHotels, editHotel, getAllHotels, deleteMyHotel, getHotel, getHotelsByCity } from "../controllers/hotel.js";
+import { addNewHotel, getMyHotels, editHotel, getAllHotels, deleteMyHotel, getHotel, getHotelsByCity, getAllHotelsByCoordinates } from "../controllers/hotel.js";
 import { authMiddleware } from "../middlewares/auth.js";
 import upload from "../middlewares/upload.js";
 const router = Router();
@@ -18,6 +18,10 @@ router.route("/getMyHotels").get(authMiddleware, getMyHotels);
 //all hotels
 router.route("/").get(getAllHotels);
 
+
+//get hotels from cordinates
+router.route("/getHotelsFromCoordinates").get(getAllHotelsByCoordinates);
+
 //get hotels by city
 router.route("/city/:city").get(getHotelsByCity);
 
@@ -29,6 +33,7 @@ router.route("/:hotelId").delete(authMiddleware, deleteMyHotel);
 
 //view individual hotel 
 router.route("/:hotelId").get(getHotel);
+
 
 
 export default router;

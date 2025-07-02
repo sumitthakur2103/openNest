@@ -1,6 +1,5 @@
 import Hotel from "../models/hotel.js";
 import { getCoordinatesFromCity } from "../utils/geocode.js";
-
 const addNewHotel = async (req, res) => {
     try {
         const {
@@ -13,11 +12,16 @@ const addNewHotel = async (req, res) => {
         } = req.body;
 
         let coordinates = req.body.coordinates;
+
         if (!coordinates) {
-            coordinates = await getCoordinatesFromCity(city);
+            coordinates = await getCoordinatesFromCity(city); // returns { lat, lng }
         }
 
-        // Get image URLs from multer-cloudinary
+        const geoCoordinates = {
+            type: "Point",
+            coordinates: [coordinates.lng, coordinates.lat]
+        };
+
         const images = req.files.map(file => file.path);
 
         const hotel = await Hotel.create({
@@ -28,7 +32,7 @@ const addNewHotel = async (req, res) => {
             address,
             price,
             images,
-            coordinates,
+            coordinates: geoCoordinates,
             owner: req.user.userId,
         });
 
@@ -48,7 +52,6 @@ const getMyHotels = async (req, res) => {
         hotels
     });
 }
-
 const editHotel = async (req, res) => {
     const { hotelId } = req.params;
     const userId = req.user.userId;
@@ -74,20 +77,21 @@ const editHotel = async (req, res) => {
             address,
             price,
             images,
-            coordinates, // optional from frontend
+            coordinates, // may come from frontend
         } = req.body;
 
         let finalCoordinates = coordinates;
 
-        // If city is changed and coordinates not provided, fetch new ones
         if (!finalCoordinates && city && city !== hotel.city) {
             finalCoordinates = await getCoordinatesFromCity(city);
         }
 
-        // If coordinates still missing, keep old
-        if (!finalCoordinates) {
-            finalCoordinates = hotel.coordinates;
-        }
+        const geoCoordinates = finalCoordinates
+            ? {
+                type: "Point",
+                coordinates: [finalCoordinates.lng, finalCoordinates.lat],
+            }
+            : hotel.coordinates;
 
         const updatedHotel = await Hotel.findByIdAndUpdate(
             hotelId,
@@ -99,7 +103,7 @@ const editHotel = async (req, res) => {
                 address,
                 price,
                 images,
-                coordinates: finalCoordinates,
+                coordinates: geoCoordinates,
             },
             { new: true }
         );
@@ -115,7 +119,6 @@ const editHotel = async (req, res) => {
         });
     }
 };
-
 
 const deleteMyHotel = async (req, res) => {
     const { hotelId } = req.params;
@@ -186,6 +189,41 @@ const getHotelsByCity = async (req, res) => {
         hotels
     });
 }
+const getAllHotelsByCoordinates = async (req, res) => {
+    const { lng, lat } = req.query;
+    console.log(lng, lat);  
 
+    if (!lng || !lat) {
+        return res.status(400).json({ message: "Coordinates are required" });
+    }
 
-export { addNewHotel, getMyHotels, editHotel, deleteMyHotel, getAllHotels, getHotel, getHotelsByCity };
+    try {
+        const hotels = await Hotel.find({
+            coordinates: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [parseFloat(lng), parseFloat(lat)]
+                    },
+                    $maxDistance: 5000 // meters (5km)
+                }
+            }
+        });
+
+        if (hotels.length === 0) {
+            return res.status(404).json({ message: "No nearby hotels found" });
+        }
+
+        res.status(200).json({
+            message: "Nearby hotels fetched successfully",
+            hotels
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Something went wrong",
+            error: error.message
+        });
+    }
+};
+
+export { addNewHotel, getMyHotels, editHotel, deleteMyHotel, getAllHotels, getHotel, getHotelsByCity, getAllHotelsByCoordinates };
