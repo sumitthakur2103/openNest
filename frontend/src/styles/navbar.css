@@ -1,35 +1,80 @@
+/* Import fonts at the top of your CSS */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
 .navbar {
-    /* background-color: black; */
-    background-color: #1e1e1e;
-    color: white;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+  background-color: #000000;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.left-nav {
-    width: 70%;
-    /* background-color:brown; */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 30px;
-    padding: 10px;
-}
-.left-nav h2{
-    font-size: 2.5rem;
-}
-
+.left-nav,
 .right-nav {
-    width: 30%;
-    /* background-color: aquamarine; */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 30px;
-    padding: 10px;
-    padding-right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #ffd700;
+}
+
+.nav-btn {
+  background-color: red;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #00000080;
+  margin-left: 10px;
+}
+
+.nav-btn:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.user-greeting {
+  font-weight: 500;
+  font-size: 15px;
+  margin-right: 6px;
 }
