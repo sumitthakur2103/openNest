@@ -1,4 +1,4 @@
-.feature-content {
+/* .feature-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,4 +16,281 @@
   font-size: 1.2rem;
   margin: 1rem 0;
   width: 60%;
+} */
+
+/* Base Layout */
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #1e1e19;
+  color: white;
+  padding: 2rem;
+}
+
+.feature-title {
+  font-size: 3.5rem;
+  margin-top: 5rem;
+}
+
+.feature-description {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  width: 60%;
+}
+
+.feature-card-row,
+.feature-card2-row {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e1e19;
+  padding-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.feature-split-section {
+  background-color: #22010a;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.feature-split-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+}
+
+.feature-split-img img {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.feature-split-text {
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 600px;
+}
+
+.feature-split-text p:first-child {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.feature-split-text h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+}
+
+.feature-split-text .desc {
+  color: #ccc;
+  font-size: 16px;
+}
+
+.feature-split-columns {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.feature-split-columns div h3 {
+  font-size: 1.5rem;
+}
+
+.feature-split-columns div p {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.feature-split-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-outline-white {
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-filled-white {
+  padding: 0.6rem 1.2rem;
+  background: #fff;
+  color: #22010a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.feature-callout {
+  background-color: #0a0000;
+  color: white;
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+.feature-callout h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.feature-callout p {
+  font-size: 1rem;
+  color: #ddd;
+  margin: 1.5rem 0 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-callout-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.feature-callout-buttons button {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.feature-callout-buttons .filled {
+  background-color: #fff;
+  color: #000;
+  border: none;
+}
+
+.feature-callout-buttons .outline {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.feature-final {
+  background-color: #151410;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 8rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.feature-final-text {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.feature-final-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-final-text p {
+  font-size: 16px;
+  color: #bbb;
+  margin-bottom: 2rem;
+}
+
+.feature-final-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.feature-final-image {
+  flex: 1;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.feature-final-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .feature-title {
+    font-size: 3rem;
+  }
+  .feature-description {
+    width: 80%;
+  }
+  .feature-split-text h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-title {
+    font-size: 2.5rem;
+  }
+  .feature-description {
+    width: 90%;
+    font-size: 1rem;
+  }
+  .feature-split-text h1 {
+    font-size: 2rem;
+  }
+  .feature-callout h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-title {
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+  .feature-description {
+    width: 95%;
+    font-size: 0.95rem;
+  }
+  .feature-split-text h1,
+  .feature-callout h1,
+  .feature-final-text h1 {
+    font-size: 1.8rem;
+  }
+  .feature-split-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
 }

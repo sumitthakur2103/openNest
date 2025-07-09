@@ -1,0 +1,32 @@
+.card-container {
+  background-color: #1e1e19;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  max-width: 368px;
+  margin: auto;
+}
+
+.card-image {
+  width: 100%;
+  border-radius: 12px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.card-container:hover {
+  transform: scale(1.05);
+  transition: transform 0.5s ease;
+}

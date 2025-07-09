@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar.jsx";
 import Aurora from "../components/Aurora.jsx";
 import HomeImg1 from "../components/HomeImg1.jsx";
 import FeatureSection from "../components/FeatureSection.jsx";
+import Footer from "../components/Footer.jsx";
+import FAQSection from "../components/FAQSection.jsx";
 export default function Home() {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -20,6 +22,8 @@ export default function Home() {
       </Aurora>
       <HomeImg1 />
       <FeatureSection />
+      <FAQSection />
+      <Footer />
     </div>
   );
 }

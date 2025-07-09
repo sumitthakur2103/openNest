@@ -1,4 +1,4 @@
-/* Import fonts at the top of your CSS */
+/* 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 * {
@@ -77,4 +77,150 @@
   font-weight: 500;
   font-size: 15px;
   margin-right: 6px;
+} */
+
+/* Base styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1e1e1e;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.left-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: white;
+}
+
+.logo-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: #ccc;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.user-greeting {
+  font-size: 1rem;
+}
+
+.nav-btn {
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Material UI buttons customization */
+.Homepage-btn {
+  font-size: 0.875rem !important;
+  padding: 6px 16px !important;
+  border-radius: 6px !important;
+  text-transform: none !important;
+}
+
+.btn1 {
+  color: #fff !important;
+  /* border-color: #fff !important; */
+}
+
+.btn1:hover {
+  color: black !important;
+  background-color: #fff;
+  border-color: #fff !important;
+}
+
+.btn2 {
+  background-color: red;
+  color: #fff;
+}
+.btn2:hover {
+  color: black;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .left-nav,
+  .right-nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .nav-link,
+  .btn-link {
+    width: 100%;
+    text-align: left;
+  }
+
+  .right-nav {
+    align-items: flex-start;
+  }
 }
