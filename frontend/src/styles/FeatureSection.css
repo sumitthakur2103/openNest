@@ -273,6 +273,36 @@
   .feature-callout h1 {
     font-size: 2.2rem;
   }
+  .feature-split-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-final {
+    flex-direction: column;
+    padding: 3rem 2rem;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .feature-final-text h1 {
+    font-size: 2rem;
+  }
+
+  .feature-final-text p {
+    font-size: 14px;
+  }
+
+  .feature-final-buttons {
+    justify-content: center;
+  }
+
+  .feature-final-image {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
 }
 
 @media (max-width: 480px) {
@@ -292,5 +322,25 @@
   .feature-split-columns {
     flex-direction: column;
     gap: 20px;
+  }
+  .feature-split-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-final {
+    padding: 2rem 1rem;
+  }
+
+  .feature-final-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .feature-final-text p {
+    font-size: 13px;
+  }
+
+  .feature-final-buttons button {
+    font-size: 14px;
+    padding: 0.6rem 1.2rem;
   }
 }

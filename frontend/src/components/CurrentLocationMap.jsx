@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import "../styles/CurrentLocationMap.css"; // Ensure you have the correct styles for the map and markers
 
 const CurrentLocationMap = () => {
   const mapContainerRef = useRef(null);
@@ -10,6 +11,8 @@ const CurrentLocationMap = () => {
   const markerRef = useRef(null);
   const [coordinates, setCoordinates] = useState(null);
   const [showLocationBtn, setShowLocationBtn] = useState(true);
+  const [showFindHotelsBtn, setShowFindHotelsBtn] = useState(false); // New state
+  const [nearbyHotels, setNearbyHotels] = useState([]);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -58,6 +61,7 @@ const CurrentLocationMap = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setShowLocationBtn(false);
+          setShowFindHotelsBtn(true); // Show 'Find Hotels Nearby' button after location is set
           updateCoordinates(longitude, latitude);
         },
         (error) => {
@@ -73,9 +77,11 @@ const CurrentLocationMap = () => {
 
   const findHotels = async () => {
     try {
+      document.querySelector("#map").classList.add("disable");
       const { lng, lat } = markerRef.current.getLngLat();
       const lngFixed = toFourDecimalPlaces(lng);
       const latFixed = toFourDecimalPlaces(lat);
+      setShowFindHotelsBtn(false); // Show 'Find Hotels Nearby' button after location is set
 
       const response = await axios.get("/hotels/getHotelsFromCoordinates", {
         params: { lng: lngFixed, lat: latFixed },
@@ -84,6 +90,7 @@ const CurrentLocationMap = () => {
       const hotels = response.data.hotels;
 
       if (hotels.length > 0) {
+        setNearbyHotels(hotels);
         for (const hotel of hotels) {
           const markerEl = document.createElement("div");
           markerEl.className = "hotel-marker-wrapper";
@@ -96,7 +103,14 @@ const CurrentLocationMap = () => {
 
           markerEl.appendChild(iconEl);
           markerEl.appendChild(tailEl);
-
+          const style = document.createElement("style");
+          style.textContent = `
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+`;
+          document.head.appendChild(style);
           const marker = new mapboxgl.Marker(markerEl)
             .setLngLat([
               hotel.coordinates.coordinates[0],
@@ -105,10 +119,12 @@ const CurrentLocationMap = () => {
             .addTo(mapRef.current);
           marker.getElement().addEventListener("mouseover", () => {
             const popup = new mapboxgl.Popup().setHTML(`
-              <h3>${hotel.name}</h3>
-              <p>${hotel.description}</p>
+              <div style="background-color: white; padding: 10px; border-radius: 5px;">
               <img src="${hotel.images[0]}" alt="${hotel.name}" />
-            `);
+              <h3 style=" color:black; font-weight: bold; margin-bottom: 5px; margin-top: 5px; ">${hotel.name}</h3>
+              <p style="color:black; margin-bottom: 5px; ">${hotel.description}</p>
+              <p style="color:black; margin-bottom: 5px; ">Price: ${hotel.price} &#8377;/night</p>
+            </div>  `);
             marker.setPopup(popup);
             popup.addTo(mapRef.current);
           });
@@ -136,20 +152,8 @@ const CurrentLocationMap = () => {
       ></div>
 
       <div
-        style={{
-          background: "rgba(0, 0, 0, 0.5)",
-          color: "#fff",
-          position: "absolute",
-          bottom: "40px",
-          left: "10px",
-          padding: "5px 10px",
-          fontFamily: "monospace",
-          fontWeight: "bold",
-          fontSize: "11px",
-          lineHeight: "18px",
-          borderRadius: "3px",
-          display: coordinates ? "block" : "none",
-        }}
+        className="map-coordinates"
+        style={{ display: coordinates ? "block" : "none" }}
       >
         {coordinates &&
           coordinates.map((coord, index) => (
@@ -158,39 +162,64 @@ const CurrentLocationMap = () => {
             </p>
           ))}
       </div>
-      <button
-        onClick={findHotels}
-        style={{
-          position: "absolute",
-          bottom: "10px",
-          left: "180px",
-          padding: "10px 20px",
-          backgroundColor: "#28a745",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        Get Marker Coordinates
-      </button>
-      {showLocationBtn && (
-        <button
-          onClick={handleCurrentLocationBtn}
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            left: "10px",
-            padding: "10px 20px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Get Current Location
-        </button>
+
+      {/* Buttons */}
+      <div className="map-button-container">
+        {showLocationBtn && (
+          <button
+            onClick={handleCurrentLocationBtn}
+            className="map-btn get-location-btn"
+          >
+            Get Current Location
+          </button>
+        )}
+
+        {showFindHotelsBtn && (
+          <button onClick={findHotels} className="map-btn get-coordinates-btn">
+            Find Hotels Nearby
+          </button>
+        )}
+      </div>
+      {nearbyHotels.length > 0 && (
+        <div className={`hotel-card-container-overlay slide-up`}>
+          <button
+            className="close-hotels-btn"
+            onClick={() => {
+              setNearbyHotels([]);
+              setShowFindHotelsBtn(true);
+              document.querySelector("#map").classList.remove("disable");
+            }}
+          >
+            &times;
+          </button>
+          <h3
+            style={{
+              marginBottom: "1rem",
+              color: "#fff",
+              textAlign: "center",
+            }}
+          >
+            Nearby Hotels
+          </h3>
+          <div className="hotel-cards">
+            {nearbyHotels.map((hotel) => (
+              <div
+                className="hotel-card"
+                key={hotel._id}
+                onClick={() => handleClick(hotel._id)}
+              >
+                <img src={hotel.images[0]} alt={hotel.name} />
+                <div className="hotel-card-content">
+                  <h4>{hotel.name}</h4>
+                  <p>{hotel.description.slice(0, 80)}...</p>
+                  <p style={{ fontWeight: "bold", color: "#ffd700 " }}>
+                    Price: {hotel.price} &#8377;/night
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </>
   );

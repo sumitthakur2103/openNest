@@ -1,0 +1,242 @@
+#map {
+  height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+}
+
+.disable {
+  height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Coordinates Box */
+.map-coordinates {
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 8px 14px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  border-radius: 8px;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Button Container */
+.map-button-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.map-btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  min-width: 160px;
+  text-align: center;
+  color: #fff;
+}
+
+.get-location-btn {
+  background-color: #541b27;
+}
+.get-location-btn:hover {
+  background-color: #3e131d;
+  transform: scale(1.03);
+}
+
+.get-coordinates-btn {
+  background-color: #007bff;
+}
+.get-coordinates-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+/* d Card Overlay */
+.hotel-card-container-overlay {
+  position: absolute;
+  top: 0%;
+  left: 100%;
+  transform: translateX(-100%);
+  height: 100vh;
+  overflow-y: auto;
+  width: 30%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 2rem 1rem;
+  z-index: 20;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.6),
+    rgba(84, 27, 39, 0.6)
+  );
+  backdrop-filter: blur(20px);
+}
+
+.close-hotels-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 100;
+  transition: transform 0.2s ease;
+}
+.close-hotels-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Hotel Cards Layout */
+.hotel-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.2rem;
+}
+
+/* Hotel Card Design */
+.hotel-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.08); /* Frosted soft white */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle glass border */
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.hotel-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.hotel-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hotel-card-content {
+  padding: 1rem;
+  color: #fff;
+}
+.hotel-card-content h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: #fff;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  transition: color 0.2s ease;
+}
+.hotel-card-content p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hotel-card-container-overlay {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hotel-card-container-overlay {
+    position: absolute;
+    width: 100%;
+    height: 40vh;
+    top: 55%;
+    left: 0;
+    transform: none;
+    padding: 1.5rem 1rem 1rem;
+    background: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.6),
+      rgba(84, 27, 39, 0.6)
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hotel-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .close-hotels-btn {
+    top: 10px;
+    right: 10px;
+  }
+
+  .map-coordinates {
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  body {
+    background: linear-gradient(to bottom right, #000, #541b27);
+  }
+}
+
+@media (max-width: 600px) {
+  .map-button-container {
+    flex-direction: column;
+    gap: 0.8rem;
+    bottom: 20px;
+  }
+
+  .map-btn {
+    min-width: 90vw;
+    font-size: 1rem;
+    padding: 14px;
+  }
+}

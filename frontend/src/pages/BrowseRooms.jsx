@@ -1,36 +1,49 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import CurrentLocationMap from '../components/CurrentLocationMap';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CurrentLocationMap from "../components/CurrentLocationMap";
+import "../styles/BrowseRooms.css";
+
 export default function BrowseRooms() {
-    const navigate = useNavigate();
-    const [city, setCity] = useState("");
+  const navigate = useNavigate();
+  const [city, setCity] = useState("");
+  const [openMap, setOpenMap] = useState(false);
 
-    const [openMap, setOpenMap] = useState(false);
+  const handleCity = (e) => {
+    e.preventDefault();
+    navigate(`/hotels/${city}`);
+  };
 
-    const handleCity = (e) => {
-        e.preventDefault();
-        console.log("City button clicked with city:", city);
-        navigate(`/hotels/${city}`);
-    }
-    const handleMap = () => {
-        console.log("Near button clicked");
-        setOpenMap(true);
-    }
-    return (
-        <><div>BrowseRooms</div>
-            <button onClick={handleMap}>Book Room Around You</button>
-            <br />
+  const handleMap = () => {
+    setOpenMap(true);
+  };
 
+  return (
+    <div className="browse-container">
+      <h1 className="browse-heading">Find Your Perfect Stay</h1>
 
-            {openMap ? (<CurrentLocationMap />) :
-                <>
-                    <h2>or</h2>
-                    <form onSubmit={handleCity}>
-                        <input type="text" placeholder='Enter City Name' required value={city} onChange={(e) => setCity(e.target.value)} />
-                        <button type='submit'>Search</button>
-                    </form>
-                </>
-            }
-        </>
-    )
+      {!openMap ? (
+        <div className="browse-options">
+          <button className="primary-btn" onClick={handleMap}>
+            Use My Current Location
+          </button>
+          <p className="divider-text">or</p>
+          <form className="city-form" onSubmit={handleCity}>
+            <input
+              className="city-input"
+              type="text"
+              placeholder="Enter a city name"
+              required
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <button className="search-btn" type="submit">
+              Search Hotels
+            </button>
+          </form>
+        </div>
+      ) : (
+        <CurrentLocationMap />
+      )}
+    </div>
+  );
 }
