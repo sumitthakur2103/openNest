@@ -18,6 +18,21 @@ export default function ViewHotel() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [allowed, setAllowed] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleNextImage = () => {
+    if (!hotelDetails?.images?.length) return;
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === hotelDetails.images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrevImage = () => {
+    if (!hotelDetails?.images?.length) return;
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? hotelDetails.images.length - 1 : prevIndex - 1
+    );
+  };
 
   useEffect(() => {
     const fetchHotelDetails = async () => {
@@ -40,6 +55,9 @@ export default function ViewHotel() {
 
   const handleFormOpen = () => {
     if (allowed) {
+      document
+        .querySelector(".hotel-details-container")
+        .classList.add("disable");
       setOpenForm(true);
     } else {
       alert("You are not allowed to book this hotel.");
@@ -164,11 +182,20 @@ export default function ViewHotel() {
     <>
       <div className="hotel-details-container">
         <div className="hotel-image-section">
-          <img
-            src={hotelDetails.images?.[0] || "/placeholder.jpg"}
-            alt={hotelDetails.name}
-            className="hotel-image"
-          />
+          <>
+            <img
+              src={
+                hotelDetails.images?.[currentImageIndex] || "/placeholder.jpg"
+              }
+              alt={hotelDetails.name}
+              className="hotel-image"
+            />
+
+            <div className="image-nav-buttons">
+              <button onClick={handlePrevImage}>⟵ Prev</button>
+              <button onClick={handleNextImage}>Next ⟶</button>
+            </div>
+          </>
         </div>
         <div className="hotel-info-section">
           <h2 className="hotel-name">{hotelDetails.name}</h2>
@@ -232,7 +259,15 @@ export default function ViewHotel() {
             />
             <button type="submit">Confirm Booking</button>
           </form>
-          <button className="close-button" onClick={() => setOpenForm(false)}>
+          <button
+            className="close-button"
+            onClick={() => {
+              setOpenForm(false);
+              document
+                .querySelector(".hotel-details-container")
+                .classList.remove("disable");
+            }}
+          >
             Close
           </button>
         </div>
