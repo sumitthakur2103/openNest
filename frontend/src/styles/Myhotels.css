@@ -1,0 +1,47 @@
+.myhotels-wrapper {
+  padding: 30px 20px;
+  background-color: #1a0d10;
+  min-height: 100vh;
+}
+
+.myhotels-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.hotel-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.no-hotels {
+  color: #ccc;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.add-hotel-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.add-hotel-button {
+  background: linear-gradient(135deg, #7a283a, #541b27);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-hotel-button:hover {
+  background: linear-gradient(135deg, #8f3247, #701c2f);
+}

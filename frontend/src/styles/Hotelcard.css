@@ -1,4 +1,4 @@
-.hotel-card {
+/* .hotel-card {
     width: 300px;
     max-width: 90%;
     background-color: #fff;
@@ -71,7 +71,6 @@
     color: #fff;
 }
 
-/* Responsive adjustments */
 @media (max-width: 500px) {
     .hotel-card {
         width: 100%;
@@ -86,4 +85,110 @@
         font-size: 0.85rem;
         padding: 6px;
     }
+} */
+.hotel-card {
+  width: 320px;
+  background: linear-gradient(145deg, #2a1a1f, #3a2027);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  color: #f0e9ec;
+}
+
+.hotel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+}
+
+.hotel-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #444;
+}
+
+.hotel-card-image.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.hotel-card-details {
+  padding: 16px;
+}
+
+.hotel-card-name {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.hotel-card-description,
+.hotel-card-city,
+.hotel-card-landmark,
+.hotel-card-address,
+.hotel-card-price {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: #ddd;
+}
+
+.hotel-card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.hotel-card-edit-btn,
+.hotel-card-delete-btn {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.hotel-card-edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.hotel-card-edit-btn:hover {
+  background-color: #0062cc;
+}
+
+.hotel-card-delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.hotel-card-delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .hotel-card {
+    width: 90%;
+  }
+
+  .hotel-card-image {
+    height: 150px;
+  }
+
+  .hotel-card-edit-btn,
+  .hotel-card-delete-btn {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
 }

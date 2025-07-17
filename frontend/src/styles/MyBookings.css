@@ -1,0 +1,72 @@
+/* MyBookings.css */
+
+body {
+  background-color: #121212;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.2rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.booking-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.booking-card {
+  background: linear-gradient(135deg, #1b1b1b, #2b2b2b, #3a2e32);
+
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  overflow: hidden;
+}
+
+.booking-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+.booking-card h3 {
+  margin-top: 0;
+  color: #f8f8f8;
+  font-size: 1.6rem;
+}
+
+.booking-card p {
+  margin: 8px 0;
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.booking-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .booking-card {
+    width: 90%;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+}
