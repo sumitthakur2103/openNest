@@ -76,22 +76,22 @@ const editHotel = async (req, res) => {
             landmark,
             address,
             price,
-            images,
-            coordinates, // may come from frontend
+            // images,
+            // coordinates, // may come from frontend
         } = req.body;
 
-        let finalCoordinates = coordinates;
+        // let finalCoordinates = coordinates;
 
-        if (!finalCoordinates && city && city !== hotel.city) {
-            finalCoordinates = await getCoordinatesFromCity(city);
-        }
+        // if (!finalCoordinates && city && city !== hotel.city) {
+        //     finalCoordinates = await getCoordinatesFromCity(city);
+        // }
 
-        const geoCoordinates = finalCoordinates
-            ? {
-                type: "Point",
-                coordinates: [finalCoordinates.lng, finalCoordinates.lat],
-            }
-            : hotel.coordinates;
+        // const geoCoordinates = finalCoordinates
+        //     ? {
+        //         type: "Point",
+        //         coordinates: [finalCoordinates.lng, finalCoordinates.lat],
+        //     }
+        //     : hotel.coordinates;
 
         const updatedHotel = await Hotel.findByIdAndUpdate(
             hotelId,
@@ -102,8 +102,8 @@ const editHotel = async (req, res) => {
                 landmark,
                 address,
                 price,
-                images,
-                coordinates: geoCoordinates,
+                // images,
+                // coordinates: geoCoordinates,
             },
             { new: true }
         );
@@ -191,7 +191,7 @@ const getHotelsByCity = async (req, res) => {
 }
 const getAllHotelsByCoordinates = async (req, res) => {
     const { lng, lat } = req.query;
-    console.log(lng, lat);  
+    console.log(lng, lat);
 
     if (!lng || !lat) {
         return res.status(400).json({ message: "Coordinates are required" });

@@ -1,0 +1,87 @@
+.edit-hotel-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 20px;
+}
+
+.edit-hotel-form {
+  background-color: #1a1a1a;
+  border: 1px solid #541b27;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-title {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 26px;
+  border-bottom: 2px solid #541b27;
+  padding-bottom: 10px;
+}
+
+.edit-hotel-form input,
+.edit-hotel-form textarea {
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #541b27;
+  background-color: #2b2b2b;
+  color: white;
+  font-size: 16px;
+  resize: none;
+}
+
+.edit-hotel-form input::placeholder,
+.edit-hotel-form textarea::placeholder {
+  color: #999;
+}
+
+.edit-hotel-form button {
+  background-color: #541b27;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.edit-hotel-form button:hover {
+  background-color: #6a2c39;
+}
+.edit-hotel-form label {
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .edit-hotel-form {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .form-title {
+    font-size: 22px;
+  }
+
+  .edit-hotel-form input,
+  .edit-hotel-form textarea {
+    font-size: 14px;
+  }
+
+  .edit-hotel-form button {
+    font-size: 15px;
+  }
+}

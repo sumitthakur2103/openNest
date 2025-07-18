@@ -99,6 +99,17 @@ export default function Navbar() {
     navigate("/myhotels");
   };
 
+  const handleMyBookings = () => {
+    navigate("/mybookings");
+  };
+
+  const handleBrowseRooms = () => {
+    if (user) {
+      navigate("/book-a-room");
+    } else {
+      navigate("/auth");
+    }
+  };
   return (
     <nav className="navbar">
       <div className="left-nav">
@@ -107,16 +118,18 @@ export default function Navbar() {
           <span className="logo-text">OpenNest</span>
         </Link>
         <div className="nav-links">
-          <Link to="/book-a-room" className="nav-link">
+          <button className="nav-link btn-link" onClick={handleBrowseRooms}>
             Browse Rooms
-          </Link>
-          <Link to="/mybookings" className="nav-link">
-            My Bookings
-          </Link>
+          </button>
           {user ? (
-            <button className="nav-link btn-link" onClick={handleMyHotels}>
-              My Hotels
-            </button>
+            <>
+              <button className="nav-link btn-link" onClick={handleMyBookings}>
+                My Bookings
+              </button>
+              <button className="nav-link btn-link" onClick={handleMyHotels}>
+                My Hotels
+              </button>
+            </>
           ) : (
             <Link to="/auth" className="nav-link">
               Partner With Us

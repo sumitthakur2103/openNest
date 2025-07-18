@@ -1,0 +1,80 @@
+.new-hotel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Headline */
+.new-hotel-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Input Fields */
+.new-hotel-container input,
+.new-hotel-container textarea {
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid #541b27;
+  background-color: #2b2b2b;
+  color: white;
+  font-size: 15px;
+  transition: border 0.3s ease;
+}
+
+.new-hotel-container input:focus,
+.new-hotel-container textarea:focus {
+  border-color: #ffcb05;
+  outline: none;
+}
+
+/* Textarea Specific */
+.new-hotel-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Button */
+.new-hotel-container button {
+  padding: 12px;
+  background-color: #541b27;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-hotel-container button:hover {
+  background-color: #ffcb05;
+  color: black;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .new-hotel-container {
+    gap: 16px;
+  }
+
+  .new-hotel-container h2 {
+    font-size: 20px;
+  }
+
+  .new-hotel-container input,
+  .new-hotel-container textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .new-hotel-container button {
+    font-size: 15px;
+    padding: 10px;
+  }
+}

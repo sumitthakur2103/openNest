@@ -1,0 +1,115 @@
+.city-hotels-page {
+  padding: 20px;
+  background-color: black;
+  min-height: 100vh;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.city-title {
+  color: #ffffff;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #541b27;
+  padding-bottom: 10px;
+  font-size: 28px;
+}
+
+.city-title span {
+  color: #541b27;
+}
+
+.hotel-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center; /* center on small screens */
+}
+
+.hotel-card {
+  background-color: #1a1a1a;
+  border: 1px solid #541b27;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.hotel-card:hover {
+  transform: scale(1.02);
+}
+
+.hotel-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.hotel-card h3 {
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.price {
+  color: #ffcb05;
+}
+
+.landmark {
+  font-style: italic;
+  color: #888;
+}
+
+.book-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #541b27;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.book-button:hover {
+  background-color: #6e2d3a;
+}
+
+/* Responsive Design */
+
+@media screen and (max-width: 768px) {
+  .hotel-container {
+    gap: 20px;
+  }
+
+  .hotel-card {
+    max-width: 90%;
+  }
+
+  .city-title {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hotel-card {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .hotel-image {
+    height: 160px;
+  }
+
+  .book-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .city-title {
+    font-size: 22px;
+  }
+}

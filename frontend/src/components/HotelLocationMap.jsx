@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "../api/axios";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "../styles/HotelLocationMap.css";
 
 const HotelLocationMap = ({ formData, setFormData, handleAddBtn }) => {
   const mapContainerRef = useRef();
@@ -108,87 +109,46 @@ const HotelLocationMap = ({ formData, setFormData, handleAddBtn }) => {
   };
 
   return (
-    <>
-      <div ref={mapContainerRef} id="map" style={{ height: "300px" }}></div>
+    <div className="map-wrapper">
+      <div ref={mapContainerRef} id="map" />
 
-      <div
-        style={{
-          background: "rgba(0, 0, 0, 0.5)",
-          color: "#fff",
-          position: "absolute",
-          bottom: "40px",
-          left: "10px",
-          padding: "5px 10px",
-          margin: 0,
-          fontFamily: "monospace",
-          fontWeight: "bold",
-          fontSize: "11px",
-          lineHeight: "18px",
-          borderRadius: "3px",
-          display: coordinates ? "block" : "none",
-        }}
-      >
-        {coordinates?.map((coord, idx) => (
-          <p key={idx} style={{ margin: 0 }}>
-            {coord}
-          </p>
-        ))}
-      </div>
+      {coordinates && (
+        <div className="map-coordinates">
+          {coordinates.map((coord, idx) => (
+            <p key={idx} style={{ margin: 0 }}>
+              {coord}
+            </p>
+          ))}
+        </div>
+      )}
 
       {showLocationBtn ? (
         <>
           <button
+            className="map-button"
+            id="use-current-location"
             onClick={handleCurrentLocationBtn}
-            style={{
-              position: "absolute",
-              bottom: "10px",
-              left: "10px",
-              padding: "10px 20px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
           >
-            Use my current location
+            Use My Current Location
           </button>
           <button
+            className="map-button"
+            id="use-this-location"
             onClick={handleAddBtn}
-            style={{
-              position: "absolute",
-              bottom: "10px",
-              left: "250px",
-              padding: "10px 20px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
           >
-            Use this location
+            Use This Location
           </button>
         </>
       ) : (
         <button
+          className="map-button"
+          id="confirm-location"
           onClick={handleAddBtn}
-          style={{
-            position: "absolute",
-            bottom: "10px",
-            left: "10px",
-            padding: "10px 20px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
         >
-          Confirm Address
+          Confirm Location
         </button>
       )}
-    </>
+    </div>
   );
 };
 
