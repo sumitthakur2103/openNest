@@ -11,7 +11,6 @@ export default function ViewHotel() {
   const { hotelId } = useParams();
   const [hotelDetails, setHotelDetails] = useState(null);
   const [openForm, setOpenForm] = useState(false);
-
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [guestDetails, setGuestDetails] = useState([{ name: "", age: "" }]);

@@ -66,34 +66,6 @@ export default function AddHotel() {
 
   return (
     <>
-      {/* {step === 1 ? (
-        <div className="add-hotel-container">
-          <div className="add-hotel-form">
-            <NewHotelDetails
-              nextStep={nextStep}
-              formData={formData}
-              setFormData={setFormData}
-            />
-
-            <label className="file-label">Upload Images (Max 5)</label>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleImageChange}
-              className="file-input"
-            />
-            <p className="file-info">{imageFiles.length} image(s) selected</p>
-            {uploading && <p className="uploading-text">Uploading images...</p>}
-          </div>
-        </div>
-      ) : (
-        <HotelLocationMap
-          formData={formData}
-          setFormData={setFormData}
-          handleAddBtn={handleAddBtn}
-        />
-      )} */}
       {step === 1 ? (
         <div className="add-hotel-container">
           <div className="add-hotel-form">
