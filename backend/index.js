@@ -15,7 +15,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: 'https://opennest1.vercel.app',
     credentials: true
 }));
 
