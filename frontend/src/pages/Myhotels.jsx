@@ -57,6 +57,7 @@ import Hotelcard from "../components/Hotelcard.jsx";
 import "../styles/Myhotels.css"; // 💅 CSS
 
 export default function Myhotels() {
+  
   const [hotels, setHotels] = useState([]);
 
   useEffect(() => {

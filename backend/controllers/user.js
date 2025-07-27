@@ -22,7 +22,7 @@ const signup = async (req, res) => {
         name, email, phoneNumber, password: hashedPassword
     })
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1m' });
 
     res.status(201).json({
         message: "User created successfully",
