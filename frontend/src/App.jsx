@@ -12,7 +12,7 @@ import EditHotel from "./pages/EditHotel";
 import AddHotel from "./pages/AddHotel";
 import BrowseRooms from "./pages/BrowseRooms";
 import CityHotelsPage from "./pages/CityHotelsPage";
-import ViewHotel from "./components/viewHotel";
+import ViewHotel from "./components/ViewHotel.jsx";
 import MyBookings from "./pages/MyBookings";
 function App() {
   return (
