@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "../api/axios.js";
 import "../styles/ViewHotel.css";
 import { useNavigate } from "react-router-dom";
-import { all } from "axios";
-import Hotel from "../../../backend/models/hotel.js";
 
 export default function ViewHotel() {
   const navigate = useNavigate();

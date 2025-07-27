@@ -1,7 +1,6 @@
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
-import HotelImg from "../assets/Hotel1.jpg";
 import { useNavigate } from "react-router-dom";
 import "../styles/Aurora.css";
 import React, { useContext } from "react";
