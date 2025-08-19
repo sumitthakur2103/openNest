@@ -13,6 +13,7 @@ const CurrentLocationMap = () => {
   const [showLocationBtn, setShowLocationBtn] = useState(true);
   const [showFindHotelsBtn, setShowFindHotelsBtn] = useState(false); // New state
   const [nearbyHotels, setNearbyHotels] = useState([]);
+  const [closeBtn, setCloseBtn] = useState(false); // New state for close button
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -81,16 +82,18 @@ const CurrentLocationMap = () => {
       const { lng, lat } = markerRef.current.getLngLat();
       const lngFixed = toFourDecimalPlaces(lng);
       const latFixed = toFourDecimalPlaces(lat);
-      setShowFindHotelsBtn(false); // Show 'Find Hotels Nearby' button after location is set
+      setShowFindHotelsBtn(false); // Hide button once location is set
 
       const response = await axios.get("/hotels/getHotelsFromCoordinates", {
         params: { lng: lngFixed, lat: latFixed },
       });
+
       console.log("Hotels found:", response.data);
       const hotels = response.data.hotels;
 
       if (hotels.length > 0) {
         setNearbyHotels(hotels);
+
         for (const hotel of hotels) {
           const markerEl = document.createElement("div");
           markerEl.className = "hotel-marker-wrapper";
@@ -103,28 +106,33 @@ const CurrentLocationMap = () => {
 
           markerEl.appendChild(iconEl);
           markerEl.appendChild(tailEl);
+
+          // animation style
           const style = document.createElement("style");
           style.textContent = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `;
           document.head.appendChild(style);
+
           const marker = new mapboxgl.Marker(markerEl)
             .setLngLat([
               hotel.coordinates.coordinates[0],
               hotel.coordinates.coordinates[1],
             ])
             .addTo(mapRef.current);
+
           marker.getElement().addEventListener("mouseover", () => {
             const popup = new mapboxgl.Popup().setHTML(`
-              <div style="background-color: white; padding: 10px; border-radius: 5px;">
+            <div style="background-color: white; padding: 10px; border-radius: 5px;">
               <img src="${hotel.images[0]}" alt="${hotel.name}" />
-              <h3 style=" color:black; font-weight: bold; margin-bottom: 5px; margin-top: 5px; ">${hotel.name}</h3>
-              <p style="color:black; margin-bottom: 5px; ">${hotel.description}</p>
-              <p style="color:black; margin-bottom: 5px; ">Price: ${hotel.price} &#8377;/night</p>
-            </div>  `);
+              <h3 style="color:black; font-weight: bold; margin: 5px 0;">${hotel.name}</h3>
+              <p style="color:black; margin-bottom: 5px;">${hotel.description}</p>
+              <p style="color:black; margin-bottom: 5px;">Price: ${hotel.price} &#8377;/night</p>
+            </div>
+          `);
             marker.setPopup(popup);
             popup.addTo(mapRef.current);
           });
@@ -139,7 +147,17 @@ const CurrentLocationMap = () => {
         }
       }
     } catch (error) {
-      console.error("Error fetching hotels:", error);
+      if (error.response && error.response.status === 404) {
+        console.error("No hotels found nearby (404).");
+        document.querySelector("#map").classList.remove("disable");
+        alert("No hotels found nearby 🚫");
+        navigate("/");
+      } else {
+        console.error("Error fetching hotels:", error.message);
+        document.querySelector("#map").classList.remove("disable");
+        alert("Something went wrong. Please try again later.");
+        navigate("/");
+      }
     }
   };
 

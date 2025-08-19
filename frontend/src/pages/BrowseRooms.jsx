@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CurrentLocationMap from "../components/CurrentLocationMap";
 import "../styles/BrowseRooms.css";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 export default function BrowseRooms() {
   const navigate = useNavigate();
   const [city, setCity] = useState("");
   const [openMap, setOpenMap] = useState(false);
+  const { user, setUser } = useContext(AuthContext);
 
   const handleCity = (e) => {
+    if (!user) {
+      alert("Please log in to search for hotels.");
+      navigate("/auth");
+      return;
+    }
     e.preventDefault();
     navigate(`/hotels/${city}`);
   };
 
   const handleMap = () => {
+    if (!user) {
+      alert("Please log in to search for hotels.");
+      navigate("/auth");
+      return;
+    }
     setOpenMap(true);
   };
 
