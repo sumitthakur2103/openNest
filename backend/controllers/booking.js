@@ -34,6 +34,32 @@ const bookRoom = async (req, res) => {
         res.status(500).json({ message: "Failed to book room", error: err.message });
     }
 }
+const checkBookingExists = async (req, res) => {
+    try {
+        const { hotelId, checkInDate, checkOutDate } = req.body;
+
+        if (!hotelId || !checkInDate || !checkOutDate) {
+            return res.status(400).json({
+                message: "Hotel ID, check-in date, and check-out date are required",
+            });
+        }
+
+        const existingBooking = await Booking.findOne({
+            hotelId,
+            checkInDate: { $lte: new Date(checkOutDate) },
+            checkOutDate: { $gte: new Date(checkInDate) },
+        });
+
+        if (existingBooking) {
+            return res.json({ exists: true, booking: existingBooking });
+        }
+
+        return res.json({ exists: false });
+    } catch (error) {
+        console.error("Error checking booking:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
 
 
 const getMyBookings = async (req, res) => {
@@ -51,4 +77,4 @@ const getMyBookings = async (req, res) => {
     }
 }
 
-export { bookRoom, getMyBookings };
+export { bookRoom, getMyBookings, checkBookingExists };

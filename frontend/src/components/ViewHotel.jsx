@@ -87,6 +87,30 @@ export default function ViewHotel() {
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
+    if (!checkInDate || !checkOutDate) {
+      alert("Please select both check-in and check-out dates.");
+      return;
+    }
+    if (new Date(checkInDate) >= new Date(checkOutDate)) {
+      alert("Check-out date must be after check-in date.");
+      return;
+    }
+    try {
+      const existingBooking = await axios.post("/bookings/checkBookingExists", {
+        hotelId,
+        checkInDate,
+        checkOutDate,
+      });
+
+      if (existingBooking.data.exists) {
+        alert("This room is already booked for the selected dates.");
+        return;
+      }
+    } catch (err) {
+      console.error("Error checking booking:", err);
+      alert("Error checking booking availability. Please try again later.");
+      return;
+    }
     const nights = calculateNights(checkInDate, checkOutDate);
     const price = nights * hotelDetails.price;
     setTotalPrice(price);
