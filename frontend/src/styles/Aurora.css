@@ -77,9 +77,29 @@
   background-color: #fff;
   color: black;
 }
+@media (max-width: 468px) {
+  .aurora-content h2 {
+    font-size: 1.5rem;
+  }
 
+  .aurora-content p {
+    font-size: 0.7rem;
+  }
+
+  .Homepage-btn-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .Homepage-btn.btn1,
+  .Homepage-btn.btn2 {
+    width: 100%;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
 /* 📱 Mobile (up to 600px) */
-@media (max-width: 600px) {
+@media (min-width: 468px) and (max-width: 600px) {
   .aurora-container {
     height: 70vh; /* give more space */
   }
