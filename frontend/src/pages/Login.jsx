@@ -19,7 +19,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [toggle, setToggle] = useState("login");
-
+  const [error, setError] = useState("");
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -31,6 +31,7 @@ export default function Login() {
       setPassword("");
       navigate("/");
     } catch (err) {
+      setError(err.response?.data?.message || err.message);
       console.error("Error:", err.response?.data?.message || err.message);
     }
   };
@@ -92,6 +93,43 @@ export default function Login() {
                 />
                 <button type="submit">Login</button>
               </form>
+              {error && (
+                <p
+                  className="error-message"
+                  style={{
+                    color: "red",
+                    fontSize: "12px",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    padding: "10px 0px",
+                  }}
+                >
+                  {error}
+                </p>
+              )}
+              <p
+                className="signup-link"
+                style={{
+                  textAlign: "center",
+                  fontSize: "14px",
+                  padding: "10px 0px",
+                  cursor: "pointer",
+                  color: "#000",
+                }}
+              >
+                Don't have an account?{" "}
+                <span
+                  onClick={() => setToggle("signup")}
+                  style={{
+                    color: "#541b27",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                  }}
+                >
+                  Sign Up
+                </span>
+              </p>
             </div>
           ) : (
             <div className="signup-container">

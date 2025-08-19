@@ -20,6 +20,9 @@
   text-align: center;
   color: white;
   z-index: 1;
+
+  /* extra */
+  padding: 0 1rem;
 }
 
 .aurora-content h2 {
@@ -35,6 +38,11 @@
 .Homepage-btn-container {
   margin-top: 20px;
   gap: 30px;
+
+  /* extra */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .Homepage-btn.btn1 {
   background-color: #541b27;
@@ -43,7 +51,11 @@
   border: 1px solid #541b27;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  margin-right: 10px;
+  /* margin-right: 10px; */
+
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .Homepage-btn.btn1:hover {
@@ -58,10 +70,70 @@
   border: 1px solid #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px #00000080;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .Homepage-btn.btn2:hover {
   background-color: #fff;
   color: black;
+}
+
+/* 📱 Mobile (up to 600px) */
+@media (max-width: 600px) {
+  .aurora-container {
+    height: 70vh; /* give more space */
+  }
+
+  .aurora-content h2 {
+    font-size: 2rem;
+  }
+
+  .aurora-content p {
+    font-size: 1rem;
+  }
+
+  .Homepage-btn-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .Homepage-btn.btn1,
+  .Homepage-btn.btn2 {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+/* 📱 Tablets (601px – 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .aurora-content h2 {
+    font-size: 2.5rem;
+  }
+
+  .aurora-content p {
+    font-size: 1.1rem;
+  }
+
+  .Homepage-btn.btn1,
+  .Homepage-btn.btn2 {
+    font-size: 1rem;
+    padding: 0.7rem 1.4rem;
+  }
+}
+
+/* 💻 Large Screens (above 1200px) */
+@media (min-width: 1200px) {
+  .aurora-content h2 {
+    font-size: 4rem;
+  }
+
+  .aurora-content p {
+    font-size: 1.3rem;
+  }
+
+  .Homepage-btn.btn1,
+  .Homepage-btn.btn2 {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.6rem;
+  }
 }
